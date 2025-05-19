@@ -27,9 +27,12 @@ yarn-error.log*
 # IDEs and editors
 .idea
 .vscode
-*.swp
-*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# OS
+# OS files
 .DS_Store
 Thumbs.db

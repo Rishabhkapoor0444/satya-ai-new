@@ -1,28 +1,28 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import dotenv from 'dotenv';
-
-// Load environment variables
-dotenv.config();
+import { config } from './config';
+import routes from './routes';
 
 const app = express();
-const port = process.env.PORT || 8000;
 
 // Middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.CORS_ORIGIN,
+  origin: config.corsOrigin,
   credentials: true
 }));
 app.use(express.json());
 
-// Health check endpoint
+// Routes
+app.use('/api', routes);
+
+// Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'healthy' });
 });
 
 // Start server
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.listen(config.port, () => {
+  console.log(`Server running on port ${config.port} in ${config.nodeEnv} mode`);
 });
